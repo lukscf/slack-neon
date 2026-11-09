@@ -61,6 +61,8 @@
     body.dataset.slnBg = settings.theme && BACKGROUNDS.has(settings.background) ? settings.background : "none";
     body.dataset.slnFont = FONTS.has(settings.font) ? settings.font : "slack";
     // fundo Bullet: o bullet-fx.js desenha num canvas dentro de #sln-fx
+    // no Slack o fundo fica atrás de muita leitura: menos balas ao mesmo tempo
+    document.documentElement.dataset.bulletFxDensity = "0.3";
     document.documentElement.dataset.bulletFx = body.dataset.slnBg === "bullet" ? "#sln-fx" : "off";
     if (!settings.tilt || !settings.theme) { resetTilt(); endFollow(); }
     placeFx();

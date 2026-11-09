@@ -70,7 +70,9 @@
     W = Math.max(1, r.width); H = Math.max(1, r.height);
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const nb = Math.round(Math.min(34, Math.max(10, (W * H) / 52000)));
+    // densidade por extensão: data-bullet-fx-density no <html> (1 = padrão, 0.3 = poucas balas)
+    const density = Math.min(1, Math.max(0.1, +(root.dataset.bulletFxDensity || 1)));
+    const nb = Math.max(3, Math.round(Math.min(34, Math.max(10, (W * H) / 52000)) * density));
     const nc = Math.round(Math.min(12, Math.max(4, (W * H) / 150000)));
     bullets = Array.from({ length: nb }, () => newBullet(true));
     coins = Array.from({ length: nc }, () => newCoin(true));
@@ -213,7 +215,7 @@
   function start(sel) {
     const target = sel === "body" ? document.body : document.querySelector(sel);
     if (!target) return false;
-    if (canvas && host === target) { kick(); return true; }
+    if (canvas && host === target) { resize(); kick(); return true; }
     stop();
     host = target;
     canvas = document.createElement("canvas");
@@ -254,7 +256,7 @@
     if (!start(sel)) setTimeout(sync, 500); // contêiner ainda não existe
   }
 
-  new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ["data-bullet-fx"] });
+  new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ["data-bullet-fx", "data-bullet-fx-density"] });
   addEventListener("resize", () => { if (canvas) { resize(); kick(); } });
   document.addEventListener("visibilitychange", kick);
   reduce.addEventListener("change", kick);
