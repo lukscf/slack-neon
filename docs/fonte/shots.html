@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>SL Neon – imagens da loja</title>
+<!-- Gera as imagens da Chrome Web Store usando o theme.css e o effects.css reais da extensão.
+     chrome --headless=new --screenshot=out.png --window-size=1280,800 "file:///.../shots.html?s=1"
+     s=1..5 capturas · s=tile (440x280) · s=marquee (1400x560). Pessoas, canais e mensagens são fictícios. -->
+<link rel="stylesheet" href="../../theme.css">
+<link rel="stylesheet" href="../../effects.css">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;width:1280px;height:800px;overflow:hidden;font:15px/1.46 "Segoe UI",system-ui,sans-serif}
+  body{background:#fff;color:#1d1c1d}
+  .p-client_container{position:fixed;inset:0;display:flex;flex-direction:column}
+  .p-top_nav{height:40px;display:flex;align-items:center;justify-content:center;flex:none}
+  .p-top_nav__search{width:560px;height:26px;border-radius:7px;font-size:13px;display:flex;align-items:center;padding:0 12px;color:var(--sln-muted)!important}
+  .p-client_workspace{flex:1;display:flex;min-height:0}
+  .p-tab_rail{width:70px;flex:none;display:flex;flex-direction:column;align-items:center;gap:16px;padding-top:10px}
+  .ws{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--sln-accent),color-mix(in srgb,var(--sln-accent) 40%,#000));box-shadow:0 0 14px var(--sln-glow)}
+  .p-tab_rail button{all:unset;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;width:56px;padding:6px 0;border-radius:10px;cursor:pointer;position:relative}
+  .p-tab_rail button i{font-style:normal;font-size:19px;line-height:1}
+  .p-tab_rail button[aria-selected=true] i{color:var(--sln-accent);filter:drop-shadow(0 0 6px var(--sln-accent))}
+  .p-channel_sidebar{width:270px;flex:none;padding:10px 10px;border-right:1px solid var(--sln-line);overflow:hidden;border-radius:12px 0 0 0}
+  .sb-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:18px;padding:4px 8px 12px;color:var(--sln-text)}
+  .p-channel_sidebar__section_heading{font-size:14px;padding:12px 8px 4px;font-weight:600}
+  .p-channel_sidebar__channel{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;font-size:15px;margin:1px 0;position:relative}
+  .p-channel_sidebar__channel b.h{width:14px;text-align:center;opacity:.8;font-weight:400}
+  .p-channel_sidebar__name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .p-channel_sidebar__badge{font-size:11px;font-weight:800;border-radius:9px;padding:0 6px;line-height:18px}
+  .mini{width:20px;height:20px;border-radius:5px;flex:none;font-size:10px;display:grid;place-items:center;color:#fff;font-weight:700}
+  .p-view_contents--primary{flex:1;display:flex;flex-direction:column;min-width:0;position:relative}
+  .p-view_header{height:50px;display:flex;align-items:center;gap:10px;padding:0 20px;flex:none;font-weight:800;font-size:18px}
+  .p-view_header small{font-weight:400;font-size:13px;color:var(--sln-muted)}
+  .p-message_pane{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 8px;min-height:0;position:relative;z-index:3;background:transparent!important}
+  .c-message_list{background:transparent!important}
+  .c-message_list__day_divider{display:flex;align-items:center;margin:10px 20px}
+  .c-message_list__day_divider__line{flex:1;height:1px}
+  .c-message_list__day_divider__label__pill{font-size:12.5px;font-weight:700;padding:3px 14px;border-radius:999px}
+  .c-message_kit__background{display:flex;gap:10px;padding:8px 20px;margin:0 10px}
+  .c-avatar{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;font-weight:800;color:#fff;font-size:14px}
+  .c-message__sender_button{font-weight:800;margin-right:7px}
+  .c-timestamp{font-size:12px}
+  .p-rich_text_section{margin-top:1px}
+  .reacts{display:flex;gap:6px;margin-top:6px}
+  .c-reaction{display:inline-flex;gap:5px;align-items:center;font-size:12.5px;padding:1px 8px;position:relative}
+  .c-message__reply_bar{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:3px 8px 3px 4px;border:1px solid transparent;border-radius:8px;font-size:13px}
+  .c-message__reply_count{font-weight:700}
+  .c-member_slug{padding:0 3px;font-weight:600}
+  .c-mrkdwn__code{font:13px Consolas,monospace;padding:1px 5px;border:1px solid;border-radius:4px}
+  .c-wysiwyg_container{margin:4px 20px 0;position:relative;z-index:3}
+  .c-wysiwyg_container__formatting,.c-wysiwyg_container__footer{display:flex;gap:16px;padding:8px 12px;font-size:14px;color:var(--sln-muted)}
+  .ql-editor{padding:4px 12px 4px;min-height:24px}
+  .c-wysiwyg_container__footer{justify-content:space-between}
+  .c-wysiwyg_container__button--send{padding:3px 12px;font-size:14px}
+  /* popup da extensão desenhado sobre o Slack (s=5) */
+  .pop{position:fixed;right:24px;top:52px;width:340px;z-index:20;border-radius:12px;overflow:hidden;border:1px solid var(--sln-line);box-shadow:0 24px 70px #000c,0 0 30px var(--sln-glow);background:radial-gradient(circle at 30% 0,color-mix(in srgb,var(--sln-accent) 25%,var(--sln-bg)),var(--sln-bg) 60%);color:var(--sln-text);font-size:13px}
+  .pop header{display:flex;gap:10px;align-items:center;padding:18px 20px 14px;border-bottom:1px solid var(--sln-line)}
+  .pop header i{font-style:normal;font-size:29px;font-weight:800;color:var(--sln-accent);text-shadow:0 0 18px var(--sln-accent)}
+  .pop header strong{display:block;font-size:17px;letter-spacing:.08em;color:var(--sln-accent)}
+  .pop header small{display:block;font-size:9px;letter-spacing:.18em;color:var(--sln-muted)}
+  .pop main{padding:6px 20px 18px}
+  .pop .row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--sln-line);font-weight:600}
+  .pop .sw{width:38px;height:22px;border-radius:15px;background:var(--sln-accent);position:relative}
+  .pop .sw:before{content:"";position:absolute;top:3px;left:19px;width:16px;height:16px;border-radius:50%;background:#fff}
+  .pop .sw.off{background:var(--sln-line)}.pop .sw.off:before{left:3px}
+  .pop h2{margin:20px 0 10px;color:var(--sln-accent);font-size:10px;letter-spacing:.15em}
+  .pop .dots{display:flex;gap:13px}.pop .dots span{width:35px;height:35px;border-radius:50%;background:var(--d);box-shadow:0 0 11px var(--d)}
+  .pop .dots span.on{outline:2px solid #fff;outline-offset:3px}
+  .pop .sel{padding:10px;border:1px solid var(--sln-line);border-radius:9px;background:var(--sln-panel)}
+  /* tile e marquee */
+  .promo{position:fixed;inset:0;display:flex;align-items:center;gap:28px;padding:0 34px;background:radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--sln-accent) 30%,var(--sln-bg)),var(--sln-bg) 65%);color:var(--sln-text);z-index:30}
+  .promo img{filter:drop-shadow(0 0 22px var(--sln-accent))}
+  .promo h1{margin:0;font-size:44px;line-height:1.05;text-shadow:0 0 26px var(--sln-glow)}
+  .promo h1 em{font-style:normal;color:var(--sln-accent)}
+  .promo p{margin:10px 0 0;color:var(--sln-muted);font-size:17px}
+  .promo .sw5{display:flex;gap:9px;margin-top:16px}.promo .sw5 span{width:22px;height:22px;border-radius:50%;background:var(--d);box-shadow:0 0 10px var(--d)}
+</style>
+</head>
+<body>
+<script>
+const q = new URLSearchParams(location.search);
+const s = q.get("s") || "1";
+const SHOTS = {
+  "1": { color: "purple", bg: "aurora", channel: "lancamentos" },
+  "2": { color: "cyan", bg: "synthwave", channel: "design", follow: true },
+  "3": { color: "pink", bg: "stars", channel: "geral" },
+  "4": { color: "green", bg: "rain", channel: "produto", compose: true },
+  "5": { color: "blue", bg: "bokeh", channel: "lancamentos", popup: true },
+  "tile": { color: "purple", bg: "stars", promo: [440, 280] },
+  "marquee": { color: "cyan", bg: "synthwave", promo: [1400, 560] },
+};
+const cfg = SHOTS[s];
+document.body.className = "sln-theme sln-tilt-on sln-compose-on";
+document.body.dataset.slnColor = cfg.color;
+document.body.dataset.slnBg = cfg.bg;
+const AV = { MC: "#c2508a", DA: "#3f7fd6", BR: "#d08a2e", TM: "#2fa67b", JN: "#8a5cd6" };
+const av = (k, sz = "") => `<div class="c-avatar" style="background:linear-gradient(135deg,${AV[k]},#000a);${sz}">${k}</div>`;
+const CH = { lancamentos: "lançamentos", design: "design", geral: "geral", produto: "produto" };
+
+const sidebar = () => {
+  const ch = (h, name, extra = "", sel = false, unread = false) =>
+    `<div class="p-channel_sidebar__channel${sel ? " p-channel_sidebar__channel--selected" : ""}${unread ? " p-channel_sidebar__channel--unread" : ""}" data-n="${name}"><b class="h">${h}</b><span class="p-channel_sidebar__name">${name}</span>${extra}</div>`;
+  const dm = (k, name, badge) => `<div class="p-channel_sidebar__channel${badge ? " p-channel_sidebar__channel--unread" : ""}"><span class="mini" style="background:${AV[k]}">${k}</span><span class="p-channel_sidebar__name">${name}</span>${badge ? `<span class="p-channel_sidebar__badge">${badge}</span>` : ""}</div>`;
+  return `<nav class="p-channel_sidebar">
+    <div class="sb-head">Estúdio Nébula <span style="font-size:15px;opacity:.7">✎</span></div>
+    ${ch("💬", "Conversas")}${ch("➤", "Rascunhos e enviados")}${ch("🔖", "Salvos")}
+    <div class="p-channel_sidebar__section_heading">▾ Canais</div>
+    ${ch("#", "geral", "", cfg.channel === "geral")}
+    ${ch("#", "design", '<span class="p-channel_sidebar__badge">3</span>', cfg.channel === "design", true)}
+    ${ch("#", "lançamentos", "", cfg.channel === "lancamentos")}
+    ${ch("#", "produto", "", cfg.channel === "produto", cfg.channel !== "produto")}
+    ${ch("#", "random")}${ch("🔒", "time-mobile", "", false, true)}${ch("#", "café-virtual")}
+    <div class="p-channel_sidebar__section_heading">▾ Mensagens diretas</div>
+    ${dm("MC", "Marina Costa", 2)}${dm("DA", "Diego Alves")}${dm("BR", "Bia Ramos")}${dm("TM", "Téo Martins", 1)}${dm("JN", "Júlia Nunes")}
+  </nav>`;
+};
+const msg = (k, name, time, body, extra = "", cls = "") =>
+  `<div class="c-message_kit__background ${cls}">${av(k)}<div><span class="c-message__sender_button">${name}</span><span class="c-timestamp">${time}</span><div class="p-rich_text_section">${body}</div>${extra}</div></div>`;
+const reacts = (list) => `<div class="reacts">${list.map(([e, n, me]) => `<span class="c-reaction${me ? " c-reaction--reacted" : ""}">${e} <span class="c-reaction__count">${n}</span></span>`).join("")}</div>`;
+const reply = (n, who) => `<div class="c-message__reply_bar">${who.map((k) => `<span class="mini" style="background:${AV[k]}">${k}</span>`).join("")}<span class="c-message__reply_count">${n} respostas</span><span class="c-timestamp">Última resposta há 4 min</span></div>`;
+const divider = (t) => `<div class="c-message_list__day_divider"><div class="c-message_list__day_divider__line"></div><span class="c-message_list__day_divider__label__pill">${t}</span><div class="c-message_list__day_divider__line"></div></div>`;
+const MSGS = {
+  lancamentos: [divider("Hoje"),
+    msg("MC", "Marina Costa", "09:12", 'Bom dia, time! A versão 2.4 do app entrou em revisão na loja 🚀'),
+    msg("DA", "Diego Alves", "09:15", 'Show! Já deixei o changelog no <span class="c-member_slug">#produto</span>. Destaques: modo offline e busca mais rápida.', reacts([["🎉", 6, true], ["🔥", 4], ["👀", 2]]), "sln-tilting"),
+    msg("BR", "Bia Ramos", "09:21", '<span class="c-member_slug c-member_slug--mention">@Marina Costa</span> consegue mandar as artes finais até as 14h?', reply(5, ["MC", "TM", "JN"])),
+    msg("TM", "Téo Martins", "09:30", 'Testei no Android e no iOS, tudo certo. Rodei o <span class="c-mrkdwn__code">npm run e2e</span> e passou 100%.', reacts([["✅", 5, true], ["🙌", 3]]))],
+  design: [divider("Ontem"),
+    msg("JN", "Júlia Nunes", "16:40", 'Subi a nova paleta no Figma. Testem os tons escuros, por favor 🎨', reacts([["😍", 7, true]])),
+    divider("Hoje"),
+    msg("BR", "Bia Ramos", "10:02", 'Ficou ótima! Só ajustaria o contraste do botão secundário.', reply(3, ["JN", "MC"])),
+    msg("MC", "Marina Costa", "10:05", 'Concordo. Também queria testar os ícones novos na barra lateral.'),
+    msg("DA", "Diego Alves", "10:11", 'Eu reviso hoje à tarde e respondo aqui na thread 👍', reacts([["👍", 4], ["💜", 2, true]]))],
+  geral: [divider("Hoje"),
+    msg("TM", "Téo Martins", "08:47", 'Lembrete: retrospectiva do sprint hoje às 16h, na sala grande ☕', reacts([["👍", 9, true], ["☕", 4]])),
+    msg("JN", "Júlia Nunes", "09:03", 'Quem topa almoço japonês amanhã? 🍣', reacts([["🙋", 6, true], ["🍣", 5], ["😋", 3]])),
+    msg("MC", "Marina Costa", "09:40", 'Bem-vindo ao time, <span class="c-member_slug c-member_slug--mention">@Diego Alves</span>! 🎉', reacts([["🎉", 12, true], ["👋", 8]]), "sln-tilting"),
+    msg("DA", "Diego Alves", "09:42", 'Valeu, pessoal! Feliz de estar aqui 😄', reply(4, ["MC", "BR"]))],
+  produto: [divider("Hoje"),
+    msg("BR", "Bia Ramos", "11:10", 'Pesquisa de satisfação fechou: nota 9,1 💚', reacts([["🚀", 8, true], ["💚", 5]])),
+    msg("TM", "Téo Martins", "11:14", 'Os pedidos mais citados foram atalhos de teclado e tema escuro.', reply(6, ["BR", "JN", "DA"])),
+    msg("MC", "Marina Costa", "11:20", 'Vou abrir as tarefas no board e marcar a próxima review para quinta.')],
+};
+
+if (cfg.promo) {
+  const [w, h] = cfg.promo;
+  document.documentElement.style.cssText = `width:${w}px;height:${h}px`;
+  document.body.style.cssText = `width:${w}px;height:${h}px`;
+  const big = w > 1000;
+  document.body.insertAdjacentHTML("beforeend", `<div id="sln-fx" style="inset:0"><div class="sln-fx-shape"></div><div class="sln-fx-particles">${Array.from({ length: 22 }, (_, i) => `<span style="--i:${i};--x:${(i * 43 + 17) % 97}%;--y:${(i * 29 + 11) % 83}%;--d:${(i * 7) % 11}s;--s:${3 + (i * 5) % 10}px"></span>`).join("")}</div></div>
+  <div class="promo" style="background:radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--sln-accent) 30%,var(--sln-bg)),var(--sln-bg) 65%)${big ? ";padding:0 110px;gap:60px" : ""}">
+    <img src="../../icons/${cfg.color}/icon128.png" width="${big ? 200 : 104}" height="${big ? 200 : 104}">
+    <div><h1 style="${big ? "font-size:72px" : "font-size:40px"}">SL <em>Neon</em></h1>
+    <p style="${big ? "font-size:28px" : "font-size:15px"}">Tema neon, fundos animados<br>e hover 3D para o Slack</p>
+    <div class="sw5">${["#bd77ff", "#5c9dff", "#ff74bb", "#4fe0db", "#75df95"].map((d) => `<span style="--d:${d}${big ? ";width:34px;height:34px" : ""}"></span>`).join("")}</div></div>
+  </div>`);
+  document.getElementById("sln-fx").style.zIndex = 31;
+} else {
+  document.body.insertAdjacentHTML("beforeend", `<div class="p-client_container">
+    <div class="p-top_nav"><div class="p-top_nav__search">🔍&nbsp; Buscar em Estúdio Nébula</div></div>
+    <div class="p-client_workspace">
+      <div class="p-tab_rail"><div class="ws">EN</div>
+        <button aria-selected="true"><i>⌂</i>Início</button><button><i>✉</i>DMs</button><button><i>🔔</i>Atividade</button><button><i>☰</i>Mais</button></div>
+      ${sidebar()}
+      <div class="p-view_contents--primary">
+        <div class="p-view_header"># ${CH[cfg.channel]} <small>· 24 membros</small></div>
+        <div class="p-message_pane"><div class="c-message_list">${MSGS[cfg.channel].join("")}</div></div>
+        <div class="c-wysiwyg_container" ${cfg.compose ? 'style="border-color:var(--sln-accent)!important;box-shadow:0 0 0 1px var(--sln-accent),0 0 26px var(--sln-glow)!important"' : ""}>
+          <div class="c-wysiwyg_container__formatting"><b>B</b><i>I</i><s>S</s>&nbsp;🔗&nbsp;☰&nbsp;&lt;/&gt;</div>
+          <div class="ql-editor">${cfg.compose ? "Fechado! Abro as tarefas ainda hoje 💪" : `<span style="color:var(--sln-muted)">Conversar em #${CH[cfg.channel]}</span>`}</div>
+          <div class="c-wysiwyg_container__footer"><span>＋&nbsp;&nbsp;Aa&nbsp;&nbsp;☺&nbsp;&nbsp;@</span><span class="c-wysiwyg_container__button--send">➤</span></div>
+        </div>
+        <div style="height:14px"></div>
+      </div>
+    </div></div>`);
+  // fundo animado na área da conversa, como na extensão
+  const fx = document.createElement("div");
+  fx.id = "sln-fx";
+  fx.innerHTML = `<div class="sln-fx-shape"></div><div class="sln-fx-particles">${Array.from({ length: 22 }, (_, i) => `<span style="--i:${i};--x:${(i * 43 + 17) % 97}%;--y:${(i * 29 + 11) % 83}%;--d:${(i * 7) % 11}s;--s:${3 + (i * 5) % 10}px">${i % 2 ? 1 : 0}</span>`).join("")}</div>`;
+  document.body.appendChild(fx);
+  const view = document.querySelector(".p-view_contents--primary").getBoundingClientRect();
+  fx.style.inset = `${view.top}px 0 0 ${view.left}px`;
+  fx.style.opacity = cfg.bg === "synthwave" ? ".24" : ".32";
+
+  // hover 3D congelado no meio do movimento
+  const tilt = document.querySelector(".sln-tilting");
+  if (tilt) { tilt.style.setProperty("--sln-x", "30%"); tilt.style.setProperty("--sln-y", "40%"); tilt.style.transform = "perspective(900px) rotateX(1.2deg) rotateY(-1deg) scale(1.006)"; }
+  if (cfg.follow) {
+    const el = document.querySelector('[data-n="lançamentos"]');
+    el.classList.add("sln-follow");
+    el.style.setProperty("--sln-rx", "-5deg"); el.style.setProperty("--sln-ry", "4deg");
+    el.style.setProperty("--sln-x", "70%"); el.style.setProperty("--sln-y", "60%");
+    el.insertAdjacentHTML("beforeend", '<span class="sln-spot"></span>');
+  }
+  if (cfg.compose) {
+    const box = document.querySelector(".c-wysiwyg_container").getBoundingClientRect();
+    document.body.insertAdjacentHTML("beforeend", `<div class="sln-send-spark" style="animation:none;left:${box.right - 160}px;top:${box.top - 150}px;transform:rotate(14deg) scale(1.4);opacity:.95">✦</div>
+      <div class="sln-send-spark" style="animation:none;left:${box.right - 110}px;top:${box.top - 70}px;opacity:.45;font-size:22px">✦</div>`);
+  }
+  if (cfg.popup) {
+    const dots = { purple: "#bd77ff", blue: "#5c9dff", pink: "#ff74bb", cyan: "#4fe0db", green: "#75df95" };
+    document.body.insertAdjacentHTML("beforeend", `<div class="pop"><header><i>#</i><div><strong>SL NEON</strong><small>APARÊNCIA DO SLACK</small></div></header><main>
+      <div class="row">Tema neon<span class="sw"></span></div><div class="row">Hover 3D com o mouse<span class="sw"></span></div>
+      <div class="row">Animar o envio de mensagens<span class="sw"></span></div><div class="row">Modo discreto<span class="sw off"></span></div>
+      <h2>COR DO TEMA</h2><div class="dots">${Object.entries(dots).map(([k, v]) => `<span class="${k === cfg.color ? "on" : ""}" style="--d:${v}"></span>`).join("")}</div>
+      <h2>FUNDO ANIMADO</h2><div class="sel">Bolhas de luz <span style="float:right;opacity:.7">⌄</span></div></main></div>`);
+  }
+}
+</script>
+</body>
+</html>

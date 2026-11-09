@@ -1,0 +1,24 @@
+#sln-fx{position:fixed;inset:40px 0 0 330px;z-index:2;pointer-events:none;overflow:hidden;opacity:.22;mix-blend-mode:screen;--sln-accent:#bd77ff;--sln-glow:#bd77ff66}
+body[data-sln-color=blue] #sln-fx{--sln-accent:#5c9dff;--sln-glow:#5c9dff66}
+body[data-sln-color=pink] #sln-fx{--sln-accent:#ff74bb;--sln-glow:#ff74bb66}
+body[data-sln-color=cyan] #sln-fx{--sln-accent:#4fe0db;--sln-glow:#4fe0db66}
+body[data-sln-color=green] #sln-fx{--sln-accent:#75df95;--sln-glow:#75df9566}
+body[data-sln-bg=none] #sln-fx{display:none}
+#sln-fx .sln-fx-shape,#sln-fx .sln-fx-particles{position:absolute;inset:0}
+#sln-fx .sln-fx-particles span{position:absolute;display:none;left:var(--x);top:var(--y);animation-delay:var(--d)}
+body[data-sln-bg=aurora] #sln-fx{background:radial-gradient(ellipse at 50% 10%,var(--sln-glow),transparent 60%)}
+body[data-sln-bg=aurora] #sln-fx .sln-fx-shape{width:60vw;height:60vh;left:10%;top:-20%;border-radius:50%;background:radial-gradient(circle,var(--sln-accent),transparent 65%);filter:blur(35px);animation:slnAurora 12s ease-in-out infinite alternate}
+body[data-sln-bg=stars] #sln-fx .sln-fx-particles span,body[data-sln-bg=orbit] #sln-fx .sln-fx-particles span{display:block;width:var(--s);height:var(--s);border-radius:50%;background:var(--sln-accent);font-size:0;box-shadow:0 0 9px var(--sln-accent);animation:slnTwinkle 2.7s ease-in-out infinite alternate}
+body[data-sln-bg=matrix] #sln-fx .sln-fx-particles span{display:block;top:-20%;font:700 21px monospace;color:#70ff9e;text-shadow:0 0 9px #50ff80;animation:slnFall calc(4s + var(--i)*.12s) linear infinite;animation-delay:calc(var(--d)*-1)}
+body[data-sln-bg=synthwave] #sln-fx{opacity:.3;background:linear-gradient(transparent 48%,#b93c8a44 55%,transparent 65%)}
+body[data-sln-bg=synthwave] #sln-fx .sln-fx-shape:before{content:"";position:absolute;width:210px;height:210px;left:calc(50% - 105px);top:12%;border-radius:50%;background:linear-gradient(#ff88cd,#ff5277 62%,transparent 63%);box-shadow:0 0 30px #ff5aa988;animation:slnSun 5s ease-in-out infinite alternate}
+body[data-sln-bg=synthwave] #sln-fx .sln-fx-shape:after{content:"";position:absolute;left:-20%;right:-20%;bottom:-45%;height:85%;transform:perspective(500px) rotateX(62deg);transform-origin:top;background:repeating-linear-gradient(0deg,transparent 0 25px,#ff57c2 26px 27px),repeating-linear-gradient(90deg,transparent 0 50px,#ff57c2 51px 52px);animation:slnGrid 5s linear infinite}
+body[data-sln-bg=bokeh] #sln-fx .sln-fx-particles span{display:block;width:calc(var(--s)*3);height:calc(var(--s)*3);border-radius:50%;border:1px solid var(--sln-accent);background:var(--sln-glow);font-size:0;animation:slnFloat calc(5s + var(--i)*.2s) ease-in-out infinite alternate}
+body[data-sln-bg=warp] #sln-fx .sln-fx-particles span{display:block;left:50%;top:50%;width:calc(var(--s)*4);height:2px;background:var(--sln-accent);box-shadow:0 0 8px var(--sln-accent);font-size:0;animation:slnWarp 2s linear infinite;animation-delay:calc(var(--d)*-.3)}
+body[data-sln-bg=rain] #sln-fx .sln-fx-particles span{display:block;top:-20%;width:2px;height:calc(var(--s)*8);background:linear-gradient(transparent,var(--sln-accent));box-shadow:0 0 7px var(--sln-accent);font-size:0;animation:slnFall 2s linear infinite;animation-delay:calc(var(--d)*-.5)}
+body[data-sln-bg=fireflies] #sln-fx .sln-fx-particles span{display:block;width:5px;height:5px;border-radius:50%;background:#eaff9a;box-shadow:0 0 9px 3px #d7ff72;font-size:0;animation:slnFloat calc(3s + var(--i)*.15s) ease-in-out infinite alternate}
+body[data-sln-bg=orbit] #sln-fx .sln-fx-shape{width:490px;height:490px;left:calc(50% - 245px);top:calc(50% - 245px);border:1px solid var(--sln-accent);border-radius:50%;box-shadow:0 0 20px var(--sln-glow);animation:slnOrbit 13s linear infinite}
+body[data-sln-bg=orbit] #sln-fx .sln-fx-shape:before,body[data-sln-bg=orbit] #sln-fx .sln-fx-shape:after{content:"";position:absolute;inset:55px;border:1px solid var(--sln-accent);border-radius:50%;transform:rotateX(65deg)}
+body[data-sln-bg=orbit] #sln-fx .sln-fx-shape:after{inset:110px;transform:rotateY(65deg)}
+@keyframes slnAurora{to{transform:translate(25%,20%) scale(1.3)}}@keyframes slnTwinkle{from{opacity:.15;transform:scale(.5)}to{opacity:1;transform:scale(1.3)}}@keyframes slnFall{to{transform:translateY(140vh)}}@keyframes slnSun{to{filter:brightness(1.4);transform:scale(1.05)}}@keyframes slnGrid{to{background-position:0 60px,60px 0}}@keyframes slnFloat{to{transform:translate(25px,-75px);opacity:.15}}@keyframes slnWarp{from{opacity:0;transform:rotate(calc(var(--i)*16deg)) translateX(20px) scaleX(.3)}to{opacity:1;transform:rotate(calc(var(--i)*16deg)) translateX(60vw) scaleX(2)}}@keyframes slnOrbit{to{transform:rotate(360deg)}}
+@media(max-width:800px){#sln-fx{left:70px}}@media(prefers-reduced-motion:reduce){#sln-fx *{animation:none!important}}
