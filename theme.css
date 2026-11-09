@@ -33,7 +33,14 @@ body.sln-theme,body.sln-theme [class]{
 /* ---------- 2. Estrutura: fundo, faixa da esquerda, topo, barra lateral, conversa ---------- */
 body.sln-theme,
 body.sln-theme :is(.p-client_container,.p-client_workspace_wrapper,.p-client_workspace,.p-ia4_client,.p-client_workspace__layout,.p-view_contents,.p-workspace__primary_view,.p-workspace__primary_view_contents,.p-workspace__primary_view_body,.p-workspace__secondary_view,.p-message_pane,.c-message_list,.p-file_drag_drop__container){background-color:var(--sln-bg)!important;color:var(--sln-text)!important}
+/* Camada com a cor do tema do workspace (ex.: azul-marinho). Fica por baixo da faixa da esquerda
+   e do topo, que o Slack deixa semitransparentes: sem isso a cor do workspace vaza por baixo. */
+body.sln-theme :is(.p-theme_background,[class*=theme_background]){background:var(--sln-bg)!important;background-image:none!important}
 body.sln-theme :is(.p-tab_rail,.p-control_strip,.p-top_nav,.p-ia4_top_nav,.p-ia4_client .p-client_workspace__tabpanel){background:var(--sln-bg)!important;color:var(--sln-text)!important;border-color:var(--sln-line)!important}
+body.sln-theme .p-tab_rail{background:linear-gradient(180deg,var(--sln-panel),var(--sln-bg))!important}
+body.sln-theme .p-tab_rail :is(.p-tab_rail__button__label,.c-tabs__tab_content){color:var(--sln-muted)!important}
+body.sln-theme .p-tab_rail :is(.p-tab_rail__button--active,.c-tabs__tab--active) :is(.p-tab_rail__button__label,.c-tabs__tab_content){color:var(--sln-text)!important}
+body.sln-theme .p-tab_rail :is(.p-tab_rail__button--active,.c-tabs__tab--active) :is(.p-tab_rail__button__icon,.c-icon,svg){color:var(--sln-accent)!important;filter:drop-shadow(0 0 6px var(--sln-accent))}
 body.sln-theme :is(.p-channel_sidebar,.p-ia4_channel_sidebar,.p-channel_sidebar__list,.p-view_contents--sidebar){background:linear-gradient(180deg,var(--sln-panel),var(--sln-bg))!important;color:var(--sln-text)!important;border-color:var(--sln-line)!important}
 body.sln-theme :is(.p-view_header,.p-view_header__container,.p-flexpane_header,.p-ia__view_header){background:var(--sln-panel)!important;color:var(--sln-text)!important;border-bottom:1px solid var(--sln-line)!important}
 body.sln-theme :is(.p-client_workspace__layout,.p-view_contents--primary,.p-view_contents--secondary){border-color:var(--sln-line)!important}
