@@ -20,6 +20,15 @@ Para lugar nenhum. A extensão não tem servidor, conta, login, analytics, anún
 ## Permissões
 - `storage`: guardar as preferências acima.
 - `activeTab`: o popup confere se a extensão está ativa na aba do Slack aberta (diagnóstico).
+- `notifications`: mostrar o aviso do Windows das mensagens novas com o ícone do tema e o botão "Abrir no Slack".
+
+## Avisos de mensagens
+Quando o Slack avisa de uma mensagem nova, o SL Neon recebe o mesmo título, texto e foto que iriam para o aviso do navegador e monta com eles o aviso neon na página ou o aviso do Windows. Esse conteúdo:
+- não é guardado;
+- não é registrado;
+- não sai do seu computador.
+
+Durante a sessão do navegador fica só um vínculo técnico entre o aviso e a aba do Slack, para o clique abrir a conversa certa. Ele é apagado ao fechar o navegador. A opção "Esconder o texto das mensagens" tira a prévia dos avisos.
 - Acesso a `https://app.slack.com/*`: aplicar o tema só nas páginas do Slack. A extensão não acessa nenhum outro site.
 
 ## Contato

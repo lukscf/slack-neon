@@ -1,0 +1,23 @@
+/* SL Neon: aviso neon de mensagens dentro da página (aparece com o Slack aberto e em foco). */
+#sln-toasts{position:fixed;right:20px;bottom:20px;z-index:2147483000;display:flex;flex-direction:column;gap:10px;width:min(380px,calc(100vw - 40px));pointer-events:none}
+.sln-toast{--a:var(--sln-accent,#bd77ff);position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px 38px 12px 12px;border-radius:14px;cursor:pointer;pointer-events:auto;
+  color:var(--sln-text,#f6ebff);background:linear-gradient(135deg,color-mix(in srgb,var(--sln-panel,#1d0f27) 92%,var(--a)),var(--sln-bg,#120918));
+  border:1px solid color-mix(in srgb,var(--a) 65%,transparent);box-shadow:0 12px 32px #000a,0 0 22px color-mix(in srgb,var(--a) 45%,transparent),inset 0 0 18px color-mix(in srgb,var(--a) 12%,transparent);
+  font:14px/1.35 var(--sln-font,Lato,"Segoe UI",Arial,sans-serif);animation:slnToastIn .38s cubic-bezier(.22,1,.36,1);transition:transform .2s,box-shadow .2s,opacity .25s}
+.sln-toast:before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--a);box-shadow:0 0 10px var(--a)}
+.sln-toast:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 16px 38px #000c,0 0 30px color-mix(in srgb,var(--a) 60%,transparent)}
+.sln-toast:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+.sln-toast.out{opacity:0;transform:translateX(40px)}
+.sln-toast img{flex:none;width:40px;height:40px;border-radius:10px;object-fit:cover;box-shadow:0 0 0 2px color-mix(in srgb,var(--a) 70%,transparent)}
+.sln-toast img.empty{background:radial-gradient(circle at 30% 30%,var(--a),color-mix(in srgb,var(--a) 30%,#000));content:url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")}
+.sln-toast-text{min-width:0;flex:1}
+.sln-toast strong{display:block;margin-bottom:2px;font-weight:800;color:var(--a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sln-toast p{margin:0;color:var(--sln-high,#e0cfed);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+.sln-toast-x{position:absolute;top:6px;right:8px;width:24px;height:24px;border:0;border-radius:999px;background:transparent;color:var(--sln-muted,#c4b4cf);font:400 18px/24px Arial,sans-serif;cursor:pointer}
+.sln-toast-x:hover{background:color-mix(in srgb,var(--a) 25%,transparent);color:#fff}
+.sln-toast.test strong:after{content:" · teste";color:var(--sln-muted,#c4b4cf);font-weight:400}
+body[data-sln-color=bullet] .sln-toast{--a:#C2F141;background:#1A1A1A;border-color:#333;box-shadow:0 12px 32px rgba(0,0,0,.55)}
+body[data-sln-color=bullet] .sln-toast:before{box-shadow:none}
+body[data-sln-color=bullet] .sln-toast strong{color:#F8F3E9}
+@keyframes slnToastIn{from{opacity:0;transform:translateX(60px) scale(.96)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sln-toast{animation:none;transition:none}}

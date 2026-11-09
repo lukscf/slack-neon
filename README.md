@@ -45,6 +45,19 @@ Funciona no Slack aberto no Chrome (`app.slack.com`). O aplicativo de desktop do
 
 ## Privacidade
 
+## Avisos de mensagens (1.2)
+
+| Situação | Aviso |
+|---|---|
+| Slack aberto e em foco | Aviso **neon** no canto da página, na cor do tema, com foto, nome e prévia; clique abre a conversa |
+| Slack em segundo plano | Aviso do **Windows** com o ícone do SL Neon na cor do tema e o botão **Abrir no Slack** |
+| As duas opções desligadas | Aviso original do navegador |
+
+O aviso do Windows segue o visual do sistema; extensões não conseguem pôr cores nele. No popup:
+- **manter o aviso até fechar**;
+- **esconder o texto das mensagens**, para compartilhar a tela (o modo discreto também esconde);
+- **Testar aviso**.
+
 Veja [PRIVACY.md](PRIVACY.md). Resumo: nenhum dado é coletado, guardado ou enviado. Só as preferências (cor, fundo, efeitos) ficam no `chrome.storage.local` do seu Chrome.
 
 ## Problemas e sugestões

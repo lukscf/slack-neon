@@ -1,5 +1,6 @@
 const DEFAULTS = {
   theme: true, tilt: true, composeFx: true, privacy: false,
+  notifyToast: true, notifyEnhance: true, notifyPersist: false, notifyPrivate: false,
   color: "purple", background: "aurora", font: "slack"
 };
 const COLORS = { purple: "#bd77ff", blue: "#5c9dff", pink: "#ff74bb", cyan: "#4fe0db", green: "#75df95", bullet: "#C2F141" };
@@ -40,13 +41,13 @@ function showColor(color) {
 }
 
 chrome.storage.local.get(DEFAULTS).then((settings) => {
-  for (const key of ["theme", "tilt", "composeFx", "privacy"]) $("#" + key).checked = !!settings[key];
+  for (const key of ["theme", "tilt", "composeFx", "privacy", "notifyToast", "notifyEnhance", "notifyPersist", "notifyPrivate"]) $("#" + key).checked = !!settings[key];
   $("#background").value = settings.background;
   $("#font").value = settings.font;
   showColor(settings.color);
 });
 
-for (const key of ["theme", "tilt", "composeFx", "privacy"]) {
+for (const key of ["theme", "tilt", "composeFx", "privacy", "notifyToast", "notifyEnhance", "notifyPersist", "notifyPrivate"]) {
   $("#" + key).addEventListener("change", (event) => {
     chrome.storage.local.set({ [key]: event.target.checked });
     status("Preferência salva.");
@@ -90,3 +91,15 @@ document.querySelectorAll(".colors button").forEach((button) => button.addEventL
     diag.textContent = `SL Neon ${version} instalado, mas não está rodando nesta aba. Recarregue o Slack (F5).`;
   }
 })();
+
+// Teste dos avisos: mostra o aviso neon na aba do Slack e o aviso do Windows, sem abrir nenhuma conversa.
+$("#notifyTest").addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.url?.startsWith(SLACK)) return status("Abra o Slack nesta aba para testar.", true);
+  try {
+    await chrome.tabs.sendMessage(tab.id, { type: "sln-notify-test" });
+    status("Aviso de teste enviado.");
+  } catch {
+    status("Recarregue o Slack (F5) para ativar os avisos.", true);
+  }
+});

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+- **Aviso neon de mensagens**: com o Slack aberto e em foco, as notificações viram um aviso no canto da página, na cor do tema, com foto, nome, prévia, animação e botão de fechar. Clicar abre a conversa, e o aviso some sozinho em 6,5 s, a menos que o mouse esteja em cima. São no máximo 4 na tela.
+- **Aviso do Windows pelo SL Neon**: com o Slack em segundo plano, o aviso do sistema sai com o ícone do SL Neon na cor do tema e o botão "Abrir no Slack", que traz a janela e a aba para frente e abre a conversa.
+- **Opções novas no popup**: manter o aviso até fechar, esconder o texto das mensagens (o modo discreto Alt+P também esconde) e um botão "Testar aviso".
+- Com as duas opções de aviso desligadas, o Slack volta a usar o aviso original do navegador.
+- Nova permissão: `notifications`, para criar o aviso do Windows.
+
 ## 1.1.1
 - Fundo "Bullet: balas e cripto" com bem menos balas ao mesmo tempo (cerca de 30% do que era), para não poluir a leitura.
 

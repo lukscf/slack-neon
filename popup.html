@@ -14,6 +14,13 @@
     <label class="switch-row"><span>Animar o envio de mensagens</span><input id="composeFx" type="checkbox" checked></label>
     <label class="switch-row"><span>Modo discreto <small>Alt+P no Slack</small></span><input id="privacy" type="checkbox"></label>
 
+    <h2>Avisos de mensagens</h2>
+    <label class="switch-row"><span>Aviso neon na página <small>Com o Slack aberto e em foco</small></span><input id="notifyToast" type="checkbox" checked></label>
+    <label class="switch-row"><span>Aviso do Windows do SL Neon <small>Ícone do tema e botão "Abrir no Slack"</small></span><input id="notifyEnhance" type="checkbox" checked></label>
+    <label class="switch-row"><span>Manter o aviso até eu fechar</span><input id="notifyPersist" type="checkbox"></label>
+    <label class="switch-row"><span>Esconder o texto das mensagens <small>Mostra só quem mandou; o modo discreto também esconde</small></span><input id="notifyPrivate" type="checkbox"></label>
+    <button type="button" id="notifyTest" class="test-btn">Testar aviso</button>
+
     <h2>Cor do tema</h2>
     <div class="colors" role="group" aria-label="Cor do tema">
       <button type="button" data-color="purple" title="Roxo" aria-label="Roxo" style="--dot:#bd77ff"></button>

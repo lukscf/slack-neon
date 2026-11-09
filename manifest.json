@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SL Neon para Slack",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Tema neon, fundos animados e hover 3D para o Slack no navegador. Cinco cores, modo discreto e animação ao enviar.",
   "icons": {
     "16": "icons/icon16.png",
@@ -11,7 +11,8 @@
   },
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "notifications"
   ],
   "host_permissions": [
     "https://app.slack.com/*"
@@ -35,14 +36,26 @@
         "https://app.slack.com/*"
       ],
       "js": [
+        "notify-main.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://app.slack.com/*"
+      ],
+      "js": [
         "bullet-fx.js",
+        "notify.js",
         "content.js"
       ],
       "css": [
         "theme.css",
         "effects.css",
         "fonts.css",
-        "bullet.css"
+        "bullet.css",
+        "notify.css"
       ],
       "run_at": "document_idle"
     }

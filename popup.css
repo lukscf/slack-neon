@@ -2,3 +2,5 @@
 
 .colors{flex-wrap:wrap}.colors button.bullet{background:radial-gradient(circle,#C2F141 0 24%,#070707 28%);border-color:#333;box-shadow:none}
 :root[data-look=bullet] header strong,:root[data-look=bullet] h2,:root[data-look=bullet] .field{color:#F8F3E9}:root[data-look=bullet] .spark{color:#C2F141;text-shadow:none}:root[data-look=bullet] input[type=checkbox]:checked{background:#C2F141}:root[data-look=bullet] input[type=checkbox]:checked:before{background:#070707}
+.test-btn{width:100%;margin-top:12px;padding:9px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font:600 12px system-ui,sans-serif;cursor:pointer}
+.test-btn:hover{border-color:var(--accent);box-shadow:0 0 12px color-mix(in srgb,var(--accent) 45%,transparent)}
