@@ -21,6 +21,7 @@
       <button type="button" data-color="pink" title="Rosa" aria-label="Rosa" style="--dot:#ff74bb"></button>
       <button type="button" data-color="cyan" title="Ciano" aria-label="Ciano" style="--dot:#4fe0db"></button>
       <button type="button" data-color="green" title="Verde" aria-label="Verde" style="--dot:#75df95"></button>
+      <button type="button" data-color="bullet" class="bullet" title="Bullet" aria-label="Bullet" style="--dot:#C2F141"></button>
     </div>
 
     <label class="field" for="background">Fundo animado</label>
@@ -34,7 +35,16 @@
       <option value="rain">Chuva neon</option>
       <option value="fireflies">Vaga-lumes</option>
       <option value="orbit">Órbitas de luz</option>
+      <option value="bullet">Bullet: balas e cripto</option>
       <option value="none">Nenhum</option>
+    </select>
+
+    <label class="field" for="font">Fonte</label>
+    <select id="font">
+      <option value="slack">Do tema (Slack; Open Sans no tema Bullet)</option>
+      <option value="mono">Mono robot (Roboto Mono)</option>
+      <option value="opensans">Open Sans</option>
+      <option value="arial">Arial</option>
     </select>
 
     <p id="status" role="status" aria-live="polite"></p>

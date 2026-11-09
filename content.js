@@ -4,10 +4,11 @@
 
   const DEFAULTS = {
     theme: true, tilt: true, composeFx: true, privacy: false,
-    color: "purple", background: "aurora"
+    color: "purple", background: "aurora", font: "slack"
   };
-  const COLORS = new Set(["purple", "blue", "pink", "cyan", "green"]);
-  const BACKGROUNDS = new Set(["aurora", "stars", "matrix", "synthwave", "bokeh", "warp", "rain", "fireflies", "orbit", "none"]);
+  const COLORS = new Set(["purple", "blue", "pink", "cyan", "green", "bullet"]);
+  const BACKGROUNDS = new Set(["aurora", "stars", "matrix", "synthwave", "bokeh", "warp", "rain", "fireflies", "orbit", "bullet", "none"]);
+  const FONTS = new Set(["slack", "mono", "opensans", "arial"]);
   const settings = { ...DEFAULTS };
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let fx;
@@ -58,6 +59,9 @@
     body.classList.toggle("sln-privacy", !!settings.privacy);
     body.dataset.slnColor = COLORS.has(settings.color) ? settings.color : "purple";
     body.dataset.slnBg = settings.theme && BACKGROUNDS.has(settings.background) ? settings.background : "none";
+    body.dataset.slnFont = FONTS.has(settings.font) ? settings.font : "slack";
+    // fundo Bullet: o bullet-fx.js desenha num canvas dentro de #sln-fx
+    document.documentElement.dataset.bulletFx = body.dataset.slnBg === "bullet" ? "#sln-fx" : "off";
     if (!settings.tilt || !settings.theme) { resetTilt(); endFollow(); }
     placeFx();
     if (settings.theme) setTimeout(fixContrast, 300);

@@ -1,6 +1,6 @@
 // Troca o ícone da barra do Chrome para a cor de tema escolhida no popup.
 // O ícone de chrome://extensions vem do manifest e é sempre o roxo (o Chrome não deixa mudá-lo).
-const COLORS = new Set(["purple", "blue", "pink", "cyan", "green"]);
+const COLORS = new Set(["purple", "blue", "pink", "cyan", "green", "bullet"]);
 
 function iconPaths(color) {
   const c = COLORS.has(color) ? color : "purple";

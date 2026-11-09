@@ -144,3 +144,17 @@ body.sln-privacy :is(.c-message_kit__background:hover,.p-channel_sidebar__channe
 @keyframes slnSendFly{0%{opacity:1;transform:translate(0,0) scale(1) rotate(0)}100%{opacity:0;transform:translate(35vw,-85vh) scale(.15) rotate(30deg)}}
 @keyframes slnPulse{0%,100%{box-shadow:0 0 0 1px var(--sln-accent),0 0 16px var(--sln-glow)}50%{box-shadow:0 0 0 1px var(--sln-accent),0 0 30px var(--sln-glow)}}
 @media(prefers-reduced-motion:reduce){body.sln-theme .c-message_kit__background,body.sln-compose-on .c-wysiwyg_container,.sln-send-spark,.sln-follow{animation:none!important;transition:none!important;transform:none!important}}
+
+/* ---------- 1.1.0: avisos e marcadores que ainda vinham no azul do Slack ---------- */
+/* "Mais não lidas" (botão flutuante da barra lateral) */
+body.sln-theme .p-channel_sidebar__banner{background:linear-gradient(135deg,var(--sln-accent),color-mix(in srgb,var(--sln-accent) 55%,var(--sln-bg)))!important;color:#fff!important;border:1px solid color-mix(in srgb,var(--sln-accent) 70%,#fff)!important;box-shadow:0 6px 18px #0009,0 0 16px var(--sln-glow)!important;text-shadow:0 1px 2px #0006}
+body.sln-theme .p-channel_sidebar__banner *{color:inherit!important;fill:currentColor!important}
+body.sln-theme .p-channel_sidebar__banner:hover{filter:brightness(1.12)}
+/* bolinha de não lida e contadores do tema */
+body.sln-theme :is(.p-unread_dot,.c-badge--themed){background:var(--sln-accent)!important;color:var(--sln-bg)!important;box-shadow:0 0 8px var(--sln-glow)}
+/* online */
+body.sln-theme :is(.c-presence--active,.c-presence--active svg,.c-presence--active path){color:var(--sln-accent)!important;fill:var(--sln-accent)!important}
+/* menções, links de entidade e "carregar mensagens antigas" */
+body.sln-theme :is(.c-base_entity,.c-base_entity__text-contents,.c-base_entity__text,[class*=loadOlderMessages],[class*=isDarkMode__] [class*=icon__]){color:var(--sln-accent)!important;border-color:color-mix(in srgb,var(--sln-accent) 45%,transparent)!important}
+body.sln-theme :is(.p-theme_background,.p-theme_background--contained){background:var(--sln-bg)!important;background-image:none!important}
+body.sln-theme [class*=container__][class*=isDarkMode__]{border-color:color-mix(in srgb,var(--sln-accent) 45%,transparent)!important}
